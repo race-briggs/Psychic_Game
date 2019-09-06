@@ -32,11 +32,37 @@
 
     var remainingGuesses = 9;
 
+    var userGuesses = [];
+
+    var winScore = document.getElementById('correct-guesses');
+
+    var loseScore = document.getElementById('wrong-guesses');
+
+    var guessesLeft = document.getElementById('remaining-guesses');
+
+    var prevGuesses = document.getElementById('prev-guesses');
+
+    function updateWins() {
+      winScore.textContent = 'Correct Guesses: ' + wins;
+    }
+
+    function updateLosses() {
+      winScore.textContent = 'Wrong Guesses: ' + losses;
+    }
+
+    function updateGuesses() {
+      winScore.textContent = 'Remaining Guesses: ' + remainingGuesses;
+    }
+    
+    function updatePrevGuesses() {
+      winScore.textContent = 'Previous Guesses: ' + userGuesses;
+    }            
+
     document.onkeyup = function(event) {
       var guess = event.key.toLowerCase();
 
       if(key === compLetter){
-
+        wins++
       }
     }
 

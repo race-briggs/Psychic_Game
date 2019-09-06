@@ -24,7 +24,7 @@
   <script>
     var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
-    var compLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
+    var compLetter;
 
     var wins = 0;
 
@@ -42,42 +42,52 @@
 
     var prevGuesses = document.getElementById('prev-guesses');
 
-    function updateWins() {
+    function letterSelect() {
+      compLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
+      console.log(compLetter);
+      return compLetter;
+    }
+
+    function updateStats() {
       winScore.textContent = 'Correct Guesses: ' + wins;
-    }
-
-    function updateLosses() {
       loseScore.textContent = 'Wrong Guesses: ' + losses;
-    }
-
-    function updateGuesses() {
-      guessesLeft.textContent = 'Remaining Guesses: ' + remainingGuesses;
-    }
-    
-    function updatePrevGuesses() {
       prevGuesses.textContent = 'Previous Guesses: ' + userGuesses;
+      guessesLeft.textContent = 'Remaining Guesses: ' + remainingGuesses;
     }
 
     function resetGame() {
-      var compLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
+      letterSelect();
 
-      var remainingGuesses = 9;
+      remainingGuesses = 9;
 
-      var userGuesses = [];
+      userGuesses = [];
+
+      updateStats();
     }            
 
-    updateWins();
-    updateLosses();
-    updateGuesses();
-    updatePrevGuesses();
+    letterSelect();
+    updateStats();
 
     document.onkeyup = function(event) {
       var guess = event.key.toLowerCase();
+      console.log(guess)
 
       if(guess === compLetter){
-        wins++
+        wins++;
+        updateStats();
+        letterSelect();
+      } else if (guess != compLetter) {
+        losses++;
+        remainingGuesses--;
+        userGuesses.push(guess + " ");
+        updateStats();
       }
+      
+      if (remainingGuesses < 1) {
+        resetGame();
+      };
     }
+
 
   </script>
 </body>

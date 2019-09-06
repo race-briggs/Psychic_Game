@@ -58,6 +58,10 @@
     function resetGame() {
       letterSelect();
 
+      wins = 0;
+
+      losses = 0;
+
       remainingGuesses = 9;
 
       userGuesses = [];
@@ -76,14 +80,16 @@
         wins++;
         updateStats();
         letterSelect();
+        userGuesses = [];
       } else if (guess != compLetter) {
         losses++;
         remainingGuesses--;
-        userGuesses.push(guess + " ");
+        userGuesses.push(" " + guess);
         updateStats();
       }
       
       if (remainingGuesses < 1) {
+        alert('You guessed the correct letter ' + wins + ' times!')
         resetGame();
       };
     }

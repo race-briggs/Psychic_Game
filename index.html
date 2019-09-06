@@ -47,21 +47,26 @@
     }
 
     function updateLosses() {
-      winScore.textContent = 'Wrong Guesses: ' + losses;
+      loseScore.textContent = 'Wrong Guesses: ' + losses;
     }
 
     function updateGuesses() {
-      winScore.textContent = 'Remaining Guesses: ' + remainingGuesses;
+      guessesLeft.textContent = 'Remaining Guesses: ' + remainingGuesses;
     }
     
     function updatePrevGuesses() {
-      winScore.textContent = 'Previous Guesses: ' + userGuesses;
+      prevGuesses.textContent = 'Previous Guesses: ' + userGuesses;
     }            
+
+    updateWins();
+    updateLosses();
+    updateGuesses();
+    updatePrevGuesses();
 
     document.onkeyup = function(event) {
       var guess = event.key.toLowerCase();
 
-      if(key === compLetter){
+      if(guess === compLetter){
         wins++
       }
     }

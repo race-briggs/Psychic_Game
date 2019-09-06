@@ -56,6 +56,14 @@
     
     function updatePrevGuesses() {
       prevGuesses.textContent = 'Previous Guesses: ' + userGuesses;
+    }
+
+    function resetGame() {
+      var compLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
+
+      var remainingGuesses = 9;
+
+      var userGuesses = [];
     }            
 
     updateWins();

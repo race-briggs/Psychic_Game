@@ -42,6 +42,10 @@
 
     var prevGuesses = document.getElementById('prev-guesses');
 
+    winScore.textContent = "Wins: "
+
+    loseScore.textContent = "Losses: "
+
     function letterSelect() {
       compLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
       console.log(compLetter);
@@ -49,18 +53,20 @@
     }
 
     function updateStats() {
-      winScore.textContent = 'Correct Guesses: ' + wins;
-      loseScore.textContent = 'Wrong Guesses: ' + losses;
       prevGuesses.textContent = 'Previous Guesses: ' + userGuesses;
       guessesLeft.textContent = 'Remaining Guesses: ' + remainingGuesses;
     }
 
+    function updateWins() {
+      winScore.textContent = 'Wins: ' + wins;
+    }
+
+    function updateLosses() {
+      loseScore.textContent = 'Losses: ' + losses;
+    }
+
     function resetGame() {
       letterSelect();
-
-      wins = 0;
-
-      losses = 0;
 
       remainingGuesses = 9;
 
@@ -78,18 +84,19 @@
 
       if(guess === compLetter){
         wins++;
-        updateStats();
+        updateWins();
         letterSelect();
         userGuesses = [];
+        resetGame();
       } else if (guess != compLetter) {
-        losses++;
         remainingGuesses--;
         userGuesses.push(" " + guess);
         updateStats();
       }
       
       if (remainingGuesses < 1) {
-        alert('You guessed the correct letter ' + wins + ' times!')
+        losses++;
+        updateLosses()
         resetGame();
       };
     }
